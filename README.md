@@ -6,7 +6,7 @@
 
 In recent years, ecoacoustics has offered an alternative to traditional biodiversity monitoring techniques with the development of passive acoustic monitoring (PAM) systems allowing, among others, to automatically detect and identify species, such as crepuscular and nocturnal tropical birds that are difficult to be tracked by human observers. PAM systems allow generating large audio datasets, but these monitoring techniques still face the challenge to infer ecological information that can be transferred to conservationists. In most cases, several thousand hours of recordings need to be manually labeled by an expert limiting the operability of the systems. Based on the advancement of meta-learning algorithms and unsupervised learning techniques, we propose Meta-Embedded Clustering (MEC), a new method to improve the quality of clustering in unlabeled bird sound datasets. 
 
-|![Meta-Embedded Clustering (MEC)](https://github.com/joachimpoutaraud/darksound/blob/master/docs/figure.png)|
+|![Meta-Embedded Clustering (MEC)](https://github.com/ear-team/darksound/blob/main/docs/figure.png)| 
 |:--:| 
 | **Meta Embedded Clustering (MEC)**|
 
