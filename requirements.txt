@@ -1,0 +1,10 @@
+https://github.com/ear-team/bambird/archive/refs/heads/production.zip
+codecarbon
+torch
+torchaudio
+torchvision
+scikit-maad>=1.3.12
+scikit-image<0.20
+numpy==1.22
+pandas==1.3.5
+hdbscan
