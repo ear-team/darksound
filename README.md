@@ -57,7 +57,7 @@ Clustering of the vector embeddings is performed using the Meta Embedded Cluster
 ```
 python clustering.py --path "embeddings/prototypical-networks-5way-1shot-densenet.pt"
 ```
-An example of the evaluation of the clustering performances of the MEC method is accessible from this [notebook](https://github.com/joachimpoutaraud/darksound/blob/master/notebooks/clustering-evaluation.ipynb).
+An example of the evaluation of the clustering performances of the MEC method is accessible from this [notebook](https://github.com/ear-team/darksound/blob/main/notebooks/clustering-evaluation.ipynb).
 
 
 ## Contributing
