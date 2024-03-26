@@ -1,0 +1,103 @@
+#===================================================================================================
+#
+# config file to build pseudo-labeled datasets for training meta-Learning algorithms
+# authors: Félix Michaud, Sylvain Haupert and Joachim Poutaraud
+#
+#===================================================================================================
+
+RANDOM_SEED: 2023                # Fixed random seed
+
+################################
+# XENO-CANTO PARAMETERS
+################################
+PARAMS_XC:
+  NUM_FILES: 100                 # Maximum number of files to download for each species
+  PARAM_XC_LIST: 
+  - grp:birds                    # Group to which the species belongs (birds, grasshoppers, bats)
+  - area:america                 # American tropics coordinates                
+  - box:-23.439,-92.734,23.439,-34.789 
+  - len:"20-60"                  # Length of the recording in seconds
+  - q:"A"                        # Current quality rating for the recording
+  CSV_XC_FILE: 'xc_metadata.csv' # The file will contain all the metadata collected from Xeno-canto
+ 
+################################
+# ROIS EXTRACTION PARAMETERS
+################################
+PARAMS_EXTRACT:
+  # Main function
+  FUNC: !FUNC bambird.extract_rois_full_sig  # select the function used to extract the rois {bambird.extract_rois_core, bambird.extract_rois_full_sig}
+  # Extract Audio resampling
+  SAMPLE_RATE: 44100             # Sampling frequency in Hz
+  # Audio preprocessing
+  LOW_FREQ: 250                  # Low frequency in Hz of the bandpass filter applied to the audio
+  HIGH_FREQ: 5000                # High frequency in Hz of the bandpass filter applied to the audio
+  BUTTER_ORDER: 5                # Butterworth filter order to select the bandwidth corresponding to the ROI
+  AUDIO_DURATION: 60             # Max duration of the audio file (in seconds)
+  CHUNK_DURATION: 10             # Split the audio signal in chunks of duration = CHUNK_DURATION (in seconds)
+  OVLP: 0                        # Define the overlap ratio between each chunk (0=> no overlap, 0.75=> 75% of overlap between 2 consecutive chunks)
+  # Spectrogram
+  MODE_RMBCKG: median            # Mode to compute the remove_background {'mean', 'median'}
+  NFFT: 1024                     # Number of points used for the SFFT to compute the spectrogram
+  N_RUNNING_MEAN: 10             # Number of points used to compute the running mean of the noise profil
+  # Hysteretic thresholding parameters
+  MASK_PARAM1: 26
+  MASK_PARAM2: 10
+  # Select and merge bbox parameters
+  MAX_RATIO_YX: 7                # ratio Y/X between the high (Y in px) and the width (X in px) of the ROI
+  MIN_DURATION: 0.2              # minimum event duration in s
+  MARGIN_T_LEFT: 0.2             # overlapping time margin in s on the left side of the ROI to merge
+  MARGIN_T_RIGHT: 0.2            # overlapping time margin in s on the right side of the ROI to merge
+  MARGIN_F_BOTTOM: 250           # overlapping frequency margin in Hz on the bottom of the ROI to merge
+  MARGIN_F_TOP: 250              # overlapping frequency margin in Hz on the top of the ROI to merge
+  # Save ROIs parameters
+  MARGIN_T: 0.2                  # time margin in s around the ROI
+  MARGIN_F: 250                  # frequency margin in Hz around the ROI
+  FILTER_ORDER: 5                # butterworth filter order to select the bandwidth corresponding to the ROI
+  
+################################
+# FEATURES EXTRACTION PARAMETERS
+################################
+PARAMS_FEATURES:
+  # Audio resampling
+  SAMPLE_RATE: 44100             # Sampling frequency in Hz
+  # Audio preprocessing
+  LOW_FREQ: 250                  # Low frequency in Hz of the bandpass filter applied to the audio 
+  HIGH_FREQ: 5000                # High frequency in Hz of the bandpass filter applied to the audio
+  BUTTER_ORDER: 5                # butterworth filter order to select the bandwidth corresponding to the ROI
+  # Spectrogram
+  NFFT: 1024                     # Number of points of the spectrogram
+  SHAPE_RES: 'high'              # Resolution of the shapes {low, med, high}
+
+################################
+# CLUSTERING PARAMETERS
+################################
+PARAMS_CLUSTER:
+  FEATURES: ['shp', 'centroid_f', 'peak_f', 'duration_t', 'bandwidth_f', 'bandwidth_min_f', 'bandwidth_max_f'] # choose the features used to cluster {'shp', 'centroid_f', 'peak_f', 'duration_t', 'bandwidth_f', 'bandwidth_min_f', 'bandwidth_max_f', 'min_f', 'max_f' }
+  SCALER: MINMAXSCALER           # scaler method to prepare the features before the clustering {STANDARDSCALER, ROBUSTSCALER, MINMAXSCALER}
+  PERCENTAGE_PTS:                # minimum number of ROIs to form a cluster (in % of the total number of ROIs) {number between 0 and 1 or blank}
+  MIN_PTS:                       # minimum number of ROIs to form a cluster {integer or blank}
+  EPS: 'auto'                    # set the maximum distance between elements in a single clusters {a number (0.18) or 'auto'}
+  METHOD: DBSCAN                 # cluster method that allow some points beeing outside of a cluster {HDBSCAN, DBSCAN}
+  KEEP: BIGGEST                  # define if we want to keep all the clusters or only the biggest cluster, while the rest is discarded as noise {BIGGEST, ALL}
+  
+################################
+# META-LEARNING MODEL
+################################
+PARAMS_MODEL:
+  BACKBONE: 'densenet'           # resnet18, vgg16, densenet, alexnet
+  NETWORK: 'prototypical'        # matching, prototypical, relation
+  PRETRAINED: True
+  FINETUNE: True
+  N_WORKERS: 28
+  N_WAY: 5
+  N_SHOT: 1
+  N_QUERY: 1
+  N_TASKS: 500
+  N_EPOCHS: 100
+  LEARNING_RATE: 0.0001
+  # Audio preprocessing
+  REMOVE_BG: False
+  HPSS: True
+  # Save the model
+  SAVE: False
+  OUTPUT_DIR: "embeddings"
