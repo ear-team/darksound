@@ -15,7 +15,7 @@ The MEC method is organized in two main steps, with: (a) fine-tuning of a pretra
 ## Installation
 Download [Anaconda](https://www.anaconda.com/products/distribution) and prepare your environment using the command line.
 ```
-conda create --name darksound python=3.8
+conda create --name darksound python=3.10
 conda activate darksound
 ```
 
@@ -24,6 +24,10 @@ Install the required libraires using the package installer [pip](https://pip.pyp
 pip install -r requirements.txt
 # If you cannot build wheels for hdbscan, install it with conda
 # conda install -c conda-forge hdbscan
+```
+Install darksound package. First go to the root directory of the package darksound (where is the config file pyproject.toml). Then execute the command line.
+```
+pip install .
 ```
 
 ## Usage
