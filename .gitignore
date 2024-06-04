@@ -122,3 +122,5 @@ maad/__pycache__/__init__.cpython-36.pyc
 
 #data
 darksound/data/
+*.wav
+*.WAV 
