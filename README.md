@@ -2,8 +2,6 @@
 
 ## A new method for improving clustering quality in unlabeled bird sound datasets
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.10512103.svg)](https://zenodo.org/records/10512103)
-
 In recent years, ecoacoustics has offered an alternative to traditional biodiversity monitoring techniques with the development of passive acoustic monitoring (PAM) systems allowing, among others, to automatically detect and identify species, such as crepuscular and nocturnal tropical birds that are difficult to be tracked by human observers. PAM systems allow generating large audio datasets, but these monitoring techniques still face the challenge to infer ecological information that can be transferred to conservationists. In most cases, several thousand hours of recordings need to be manually labeled by an expert limiting the operability of the systems. Based on the advancement of meta-learning algorithms and unsupervised learning techniques, we propose Meta-Embedded Clustering (MEC), a new method to improve the quality of clustering in unlabeled bird sound datasets. 
 
 |![Meta-Embedded Clustering (MEC)](https://github.com/ear-team/darksound/blob/main/docs/figure.png)| 
@@ -32,6 +30,8 @@ pip install .
 
 ## Usage
 ### Darksound Dataset 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.10512103.svg)](https://zenodo.org/records/10512103)
+
 Darksound is an open-source and code-based dataset for the evaluation of unsupervised meta-learning algorithms in the context of ecoacoustics. This dataset is composed of regions of interest (ROIs) of nocturnal and crepuscular bird species living in tropical environments that were automatically segmented using the Python package Bambird ([Michaud et al., 2023](https://www.sciencedirect.com/science/article/abs/pii/S1574954122004022)). The dataset is split into two sets, with a training set and a test set. 
 
 The dataset is easily accessible and downloadable on [Zenodo](https://zenodo.org/records/10512103) or can be directly downloaded using Python:
@@ -63,6 +63,10 @@ python clustering.py --path "embeddings/prototypical-networks-5way-1shot-densene
 ```
 An example of the evaluation of the clustering performances of the MEC method is accessible from this [notebook](https://github.com/ear-team/darksound/blob/main/notebooks/clustering-evaluation.ipynb).
 
+## Citing this work
+If you find the MEC method useful for your research, please consider citing it as:
+
+- Poutaraud, J., Sueur, J., Thébaud, C., Haupert, S., [Meta-Embedded Clustering (MEC): A new method for improving clustering quality in unlabeled bird sound datasets](https://doi.org/10.1016/j.ecoinf.2024.102687), Ecological Informatics, Volume 82, September 2024.
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change. Please make sure to update tests as appropriate.
