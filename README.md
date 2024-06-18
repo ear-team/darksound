@@ -64,6 +64,7 @@ python clustering.py --path "embeddings/prototypical-networks-5way-1shot-densene
 An example of the evaluation of the clustering performances of the MEC method is accessible from this [notebook](https://github.com/ear-team/darksound/blob/main/notebooks/clustering-evaluation.ipynb).
 
 ## Citing this work
+[![Citation Badge](https://api.juleskreuer.eu/citation-badge.php?doi=10.1016/j.ecoinf.2024.102687)](https://juleskreuer.eu/citation-badge/)
 If you find the MEC method useful for your research, please consider citing it as:
 
 - Poutaraud, J., Sueur, J., Thébaud, C., Haupert, S., [Meta-Embedded Clustering (MEC): A new method for improving clustering quality in unlabeled bird sound datasets](https://doi.org/10.1016/j.ecoinf.2024.102687), Ecological Informatics, Volume 82, September 2024.
